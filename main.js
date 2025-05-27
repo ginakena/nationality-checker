@@ -15,14 +15,18 @@ submitBtn.addEventListener('click', async (e) => {
         resultDiv.textContent = "Loading..."
         const response = await fetch(`https://api.nationalize.io/?name=${name}`)
         const data = await response.json();
-        let {country, name} = data;
-        console.log(data)
-
+        
+        let country = data.country[0].country_id;
+        let probability = data.country[0].probability * 100;
+        
+        resultDiv.innerHTML = `
+            ${name} is <span>${country}</span> with 
+            <span>${probability.toFixed(1)}%</span> certainty
+        `;
 
     } catch (e) {
         resultDiv.innerHTML = `Something went wrong`
+        console.log(e)
     }
 
-  
 });
-
