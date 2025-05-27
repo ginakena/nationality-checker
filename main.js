@@ -1,32 +1,43 @@
-const submitBtn = document.getElementById('submitBtn');
-const nameInput = document.getElementById('formInput');
-const resultDiv = document.getElementById('result');
+const submitBtn = document.getElementById("submitBtn");
+const nameInput = document.getElementById("formInput");
+const resultDiv = document.getElementById("result");
 
-submitBtn.addEventListener('click', async (e) => {
-    e.preventDefault();
-    const name = nameInput.value;
-    
-    if (name === "") {
-        alert('Please enter a name');
-        return;
-    }
-     
-    try {
-        resultDiv.textContent = "Loading..."
-        const response = await fetch(`https://api.nationalize.io/?name=${name}`)
-        const data = await response.json();
-        
-        let country = data.country[0].country_id;
-        let probability = data.country[0].probability * 100;
-        
-        resultDiv.innerHTML = `
-            ${name} is <span>${country}</span> with 
-            <span>${probability.toFixed(1)}%</span> certainty
+submitBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  resultDiv.innerHTML = "";
+  resultDiv.style.display = "block";
+
+  const nameValue = nameInput.value;
+
+  if (nameValue === "") {
+    alert("Please enter a name");
+    return;
+  }
+
+  try {    
+    const response = await fetch(
+      `https://api.nationalize.io/?name=${nameValue}`
+    );
+    const data = await response.json();
+
+    let { country, count } = data;
+    country.forEach((element) => {
+      let { country_id, probability } = element;
+      resultDiv.innerHTML += `
+             ${getCountryName(country_id)} <span>(${country_id})</span> with <span>${(probability * 100).toFixed(2)}%</span> certainty</p>
         `;
 
-    } catch (e) {
-        resultDiv.innerHTML = `Something went wrong`
-        console.log(e)
-    }
+    });
 
+    // let country = data.country[0].country_id;
+    // let probability = data.country[0].probability * 100;
+  } catch (e) {
+    resultDiv.innerHTML = `Something went wrong`;
+    console.log(e);
+  }
 });
+
+function getCountryName(countryCode) {
+    let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
+    return regionNames.of(countryCode);
+}
