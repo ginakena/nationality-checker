@@ -1,22 +1,28 @@
-const nameForm = document.getElementById('nameForm');
-const nameInput = document.getElementById('nameInput');
+const submitBtn = document.getElementById('submitBtn');
+const nameInput = document.getElementById('formInput');
 const resultDiv = document.getElementById('result');
 
-nameForm.addEventListener('submit', async (e) => {
+submitBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     const name = nameInput.value;
     
-    if (!name) {
+    if (name === "") {
         alert('Please enter a name');
         return;
     }
      
     try {
-        const response = await fetch( `https://api.nationalize.io/?name=$(name)`)
-        const results = await response.json();
-        
+        resultDiv.textContent = "Loading..."
+        const response = await fetch(`https://api.nationalize.io/?name=${name}`)
+        const data = await response.json();
+        let {country, name} = data;
+        console.log(data)
 
+
+    } catch (e) {
+        resultDiv.innerHTML = `Something went wrong`
     }
+
   
 });
 

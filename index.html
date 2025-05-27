@@ -1,36 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
     <title>Nationality Checker</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="header-links">
-            <a href="https://github.com/ginakena">Github</a>
-            <a href="https://www.linkedin.com/in/regina-makena-a12731267/">LinkedIn</a>
-        </div>
-    </header> 
-    
+      <div class="header-links">
+        <a href="https://github.com/ginakena">Github</a>
+        <a href="https://www.linkedin.com/in/regina-makena-a12731267/"
+          >LinkedIn</a
+        >
+      </div>
+    </header>
+
     <div class="text-area">
-        <h1>Nationality Checker</h1>  
-        <p>Predict the ethnicity of a name</p>
-        
-        <div class="form-container">
-            <form id="nameForm">
-                <input type="text" id="formInput" placeholder="Enter a name" required>
-                <button type="submit">Check Nationality</button>
-            </form>
-        </div>   
-        
-        <div id="result"></div>
+      <h1>Nationality Checker</h1>
+      <p>Predict the ethnicity of a name</p>
+
+      <div class="form-container">
+        <form id="nameForm">
+          <input
+            type="text"
+            id="formInput"
+            placeholder="Enter a name"
+            required
+          />
+          <button id="submitBtn" type="submit">Check Nationality</button>
+        </form>
+      </div>
+
+      <div id="result">
+        <p></p>
+      </div>
     </div>
 
     <script src="main.js"></script>
-</body>
+  </body>
 </html>
